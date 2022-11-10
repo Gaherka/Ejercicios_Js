@@ -1,0 +1,138 @@
+/** Elaborar un algoritmo para leer la edad de 10 personas y mostrar cuantos son mayores de edad. */
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 7</title>
+</head>
+<body>
+    <form class="formulario">
+        <div>
+            <label>Nombre de la persona:</label><input type="text" name="nombre">
+        </div>
+        <div>
+            <label>Edad:</label><input type="number" name="edad">
+        </div>
+        <div>
+            <br><input type="submit" value="Agregar" class="agregar">
+        </div>
+    </form>
+    <table id="listado" class='hide'>
+        <thead>
+            <th>Nombre</th>
+            <th>Edad</th>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    <div id="calculos" class='hide'></div>
+    <script>
+        document.querySelector("input[class=agregar]").addEventListener("click",function(e){
+            e.preventDefault();
+
+            var nombre=document.querySelector("input[name=nombre]");
+            var edad=document.querySelector("input[name=edad]");
+
+    // mostramos un error si no ha recibido el nombre
+            if(!nombre.value){
+                nombre.classList.add("error");
+                return;
+            }
+            nombre.classList.remove("error");
+
+    // mostramos un error si no ha recibido una nota
+            if(isNaN(parseInt(edad.value)) || (parseInt(edad.value)<0 && parseInt(edad.value)>10)){
+                edad.classList.add("error");
+                return;
+            }
+            edad.classList.remove("error");
+
+    // añadimos el alumno a la tabla crando el tr, td's y el botón para eliminarlo
+            var tr=document.createElement("tr");
+
+            var tdNombre=document.createElement("td");
+            var txt=document.createTextNode(nombre.value);
+            tdNombre.appendChild(txt);
+            tdNombre.className="nombre";
+
+            var tdEdad=document.createElement("td");
+            txt=document.createTextNode(edad.value);
+            tdEdad.appendChild(txt);
+            tdEdad.className="right";
+
+            var tdRemove=document.createElement("td");
+            var buttonRemove=document.createElement("input")
+            buttonRemove.type="button";
+            buttonRemove.value="Eliminar";
+            buttonRemove.onclick=function () {
+        // elimina la columna
+            this.parentElement.parentElement.remove();
+
+        // Si no hay ningun alumno, escondemos la tabla
+            if(document.getElementById("listado").querySelector("tbody").querySelectorAll("tr").length==0){
+                document.getElementById("listado").classList.add("hide");
+                document.getElementById("calculos").classList.add("hide");
+            }
+            calculos();
+            };
+            tdRemove.appendChild(buttonRemove);
+
+            tr.appendChild(tdNombre);
+            tr.appendChild(tdEdad);
+            tr.appendChild(tdRemove);
+
+            var tbody=document.getElementById("listado").querySelector("tbody").appendChild(tr);
+
+    // eliminamos la clase que tiene oculta la tabla cuando no hay ningun alumno
+            document.getElementById("listado").classList.remove("hide");
+            document.getElementById("calculos").classList.remove("hide");
+
+    //limpiamos los valores del input
+            edad.value="";
+            nombre.value="";
+            nombre.focus();
+
+    // realizamos los calculos
+            calculos();
+        });
+
+/**
+ * funcion que realiza los calculos leyendo el contenido de la tabla
+ */
+            function calculos() {
+    // Obtenemos un array con los alumnos de la tabla
+            var personasAgregadas=document.getElementById("listado").querySelector("tbody").querySelectorAll("tr");
+
+    // guardamos en un array todos los alumnos aprobados, reprobados.
+            var mayores_de_edad=[];
+            var menores_de_edad=[];
+
+    // bucle por cada uno de los alumnos
+            for (let i=0;i<personasAgregadas.length;i++){
+                let tds=personasAgregadas[i].getElementsByTagName('td');
+
+        // aprobados
+                if(parseFloat(tds[1].innerHTML)>= 18) {
+                    mayores_de_edad.push(tds[0].innerHTML);
+                }
+
+        // reprobados
+                if(parseFloat(tds[1].innerHTML)<= 17) {
+                    menores_de_edad.push(tds[0].innerHTML);
+                }
+            }
+
+    // mostramos el resultado
+                
+                
+                var result = result+="<div>Los mayores de edad son: <span>"+mayores_de_edad+"</span></div>";
+                result+="<div>Los menores de edad son: <span>"+menores_de_edad+"</span></div>";
+
+                document.getElementById("calculos").innerHTML=result;
+        }
+    </script>
+</body>
+</html>

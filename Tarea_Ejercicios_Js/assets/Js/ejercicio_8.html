@@ -1,0 +1,86 @@
+/** Elabore un algoritmo con un menú simple con las cuatro operaciones básicas: sumar, restar, multiplicar, dividir.*/
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 8</title>
+</head>
+<body> 
+
+    <form name="formulario1">
+        <table style="text-align: left; margin-left: auto; margin-right: auto;">
+            <tbody>
+                <tr>
+                    <td>
+                        <label for="a">Ingresa el valor de a:</label>
+                    </td>
+                    <td>
+                        <input name="a" required="required" step="0.000001" type="number">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="b">Ingresa el valor de b:</label>
+                    </td>
+                    <td>
+                        <input name="b" required="required" step="0.000001" type="number">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="operacion">Selecciona el valor de operacion:</label>
+                    </td>
+                    <td>
+                        <select name="operacion" required="required">
+                            <option value="1">Suma</option>
+                            <option value="2">Resta</option>
+                            <option value="3">Multiplicacion</option>
+                            <option value="4">Division</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr align="center">
+                    <td colspan="2" rowspan="1">
+                        <input value="Procesar" type="button" onclick="calcular();">
+                        <input type="reset">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="resultado">Valor de resultado:</label>
+                    </td>
+                    <td>
+                        <input name="resultado" step="0.000001" type="number">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+
+    <script>
+        function calcular() {
+            let operacion;
+            let a, b, resultado;
+            a = parseFloat(document.formulario1.a.value);
+            b = parseFloat(document.formulario1.b.value);
+            operacion = parseInt(document.formulario1.operacion.value);
+            resultado = 0;
+
+            if(operacion == 1) {
+                resultado = a + b;
+            } else if(operacion == 2) {
+                resultado = a - b;
+            } else if (operacion == 3) {
+                resultado = a * b;
+            } else if (operacion == 4 && b != 0) {
+                resultado = a / b;
+            }
+
+            document.formulario1.resultado.value = resultado;
+        }
+    </script>
+</body>
+</html>

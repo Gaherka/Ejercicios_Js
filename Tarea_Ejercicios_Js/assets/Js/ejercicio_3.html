@@ -1,0 +1,114 @@
+/* El costo de las llamadas telefónicas internacionales depende de la zona geográfica en la que se encuentre el país destino y del número de minutos hablados. En la siguiente tabla se presenta el costo del minuto por zona. A cada zona se le ha asociado una clave.
+Nota: Para llamadas con duración menor a 30 minutos se hace descuento del 10%.
+Clave - Zona - Precio
+
+12 - América del Norte - $ 2.00
+
+15 - América Central - $ 2.20
+
+18 - América del Sur - $ 4.50
+
+19 - Europa - $ 3.50
+
+23 - Asia - $ 6.00
+
+25 - África - $ 6.00
+
+29 - Oceanía - $ 5.00
+*/
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 3</title>
+</head>
+<body>
+
+    <form name="formulario1">
+        <table style="text-align: left; margin-left: auto; margin-right: auto;">
+            <tbody>
+                <tr>
+                    <td>
+                        <label for="clave">Ingresa el valor de clave:</label>
+                    </td>
+                    <td>
+                        <input name="clave" required="required" type="number" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="tiempo_en_minuto">Ingresa el valor de tiempo en minuto:</label>
+                    </td>
+                    <td>
+                        <input name="tiempo_en_minuto" required="required" step="0.000001" type="number" />
+                    </td>
+                </tr>
+                <tr align="center">
+                    <td colspan="2" rowspan="1">
+                        <input value="Procesar" type="button" onclick="costos();" />
+                        <input type="reset" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="costo_de_la_llamada">Valor de costo de la llamada:</label>
+                    </td>
+                    <td>
+                        <input name="costo_de_la_llamada" type="number" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="costo_del_minuto">Valor de costo del minuto:</label>
+                    </td>
+                    <td>
+                        <input name="costo_del_minuto" type="number" />
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+
+    <script>
+        function costos() {
+            let clave, costo_de_la_llamada, costo_del_minuto, tiempo_en_minuto;
+            clave = parseFloat (document.formulario1.clave.value);
+            tiempo_en_minuto = parseFloat (document.formulario1.tiempo_en_minuto.value);
+            costo_del_minuto = 0;
+
+            if(clave == 12) {
+                alert("America del Norte");
+                costo_del_minuto = 2;
+            }else if (clave == 15){
+                alert("America Central");
+                costo_del_minuto = 2.2;
+            } else if(clave == 18) {
+                alert("America del Sur")
+                costo_del_minuto = 4.5
+            } else if(clave == 19) {
+                alert("Europa")
+                costo_del_minuto = 3.5
+            } else if(clave == 23) {
+                alert("Asia")
+                costo_del_minuto = 6
+            } else if(clave == 25) {
+                alert("Africa")
+                costo_del_minuto == 6
+            } else if (clave == 29) {
+                alert("Oceania")
+                costo_del_minuto == 5
+            } else {
+                alert("Clave invalida")
+                costo_del_minuto == 0
+            }
+
+            costo_de_la_llamada = tiempo_en_minuto * costo_del_minuto;
+            document.formulario1.costo_de_la_llamada.value = costo_de_la_llamada;
+            document.formulario1.costo_del_minuto.value = costo_del_minuto;
+        }
+    </script>
+</body>
+</html>
