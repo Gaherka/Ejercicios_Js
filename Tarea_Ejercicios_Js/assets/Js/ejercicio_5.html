@@ -43,14 +43,14 @@
             }
             nombre.classList.remove("error");
 
-    // mostramos un error si no ha recibido una nota
+    // mostramos un error si no ha recibido una edad
             if(isNaN(parseInt(edad.value)) || (parseInt(edad.value)<0 && parseInt(edad.value)>10)){
                 edad.classList.add("error");
                 return;
             }
             edad.classList.remove("error");
 
-    // añadimos el alumno a la tabla crando el tr, td's y el botón para eliminarlo
+    // añadimos el nombre a la tabla crando el tr, td's y el botón para eliminarlo
             var tr=document.createElement("tr");
 
             var tdNombre=document.createElement("td");
@@ -71,7 +71,7 @@
         // elimina la columna
             this.parentElement.parentElement.remove();
 
-        // Si no hay ningun alumno, escondemos la tabla
+        // Si no hay ningun nombre, escondemos la tabla
             if(document.getElementById("listado").querySelector("tbody").querySelectorAll("tr").length==0){
                 document.getElementById("listado").classList.add("hide");
                 document.getElementById("calculos").classList.add("hide");
@@ -86,7 +86,7 @@
 
             var tbody=document.getElementById("listado").querySelector("tbody").appendChild(tr);
 
-    // eliminamos la clase que tiene oculta la tabla cuando no hay ningun alumno
+    // eliminamos la clase que tiene oculta la tabla cuando no hay ningun nombre
             document.getElementById("listado").classList.remove("hide");
             document.getElementById("calculos").classList.remove("hide");
 
@@ -103,7 +103,7 @@
  * funcion que realiza los calculos leyendo el contenido de la tabla
  */
             function calculos() {
-    // Obtenemos un array con los alumnos de la tabla
+    // Obtenemos un array con los nombres de la tabla
             var personasAgregadas=document.getElementById("listado").querySelector("tbody").querySelectorAll("tr");
 
     // guardamos en un array todos los alumnos aprobados, reprobados.
